@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              html.window.open('https://github.com/Siputsss/siska-flutter', 'siska-flutter');
+              html.window.open('https://github.com/Siputsss/siska-fb', 'siska-fb');
             },
             icon: const Icon(SimpleIcons.github, color: SimpleIconColors.github),
           ),
