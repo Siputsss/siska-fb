@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'dart:html' as html;
 
+import 'package:siska_fb/ui_screens/admin/widgets/admin_page.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -19,7 +21,24 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AdminPage()),
+                );
+              },
+              child: Text(
+                "Admin Page",
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
