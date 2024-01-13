@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/admin/admin_data.dart';
 import 'package:siska_fb/ui_screens/admin/widgets/admin_detail.dart';
 import 'package:siska_fb/ui_screens/admin/widgets/admin_input.dart';
 
@@ -11,13 +12,6 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  Future<QuerySnapshot<Map<String, dynamic>>> getColl() async {
-    final result = await FirebaseFirestore.instance.collection('coba').get();
-    return result;
-  }
-
-  var selectedId = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

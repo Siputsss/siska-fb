@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/admin/admin_data.dart';
 
 class AdminInput extends StatefulWidget {
   const AdminInput({super.key});
@@ -9,14 +10,6 @@ class AdminInput extends StatefulWidget {
 }
 
 class _AdminInputState extends State<AdminInput> {
-  final ctrlNama = TextEditingController();
-
-  final ctrlHarga = TextEditingController();
-
-  final ctrlDesc = TextEditingController();
-
-  var isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,56 +24,109 @@ class _AdminInputState extends State<AdminInput> {
               children: [
                 TextField(
                   controller: ctrlNama,
-                  decoration: const InputDecoration(
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                      setState(() {
+                        isShowClearNama = false;
+                      });
+                    } else {
+                      setState(() {
+                        isShowClearNama = true;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
                     hintText: 'enter the product name',
                     labelText: 'Product Name',
-                    border: OutlineInputBorder(),
+                    suffixIcon: isShowClearNama
+                        ? IconButton(
+                            onPressed: () {
+                              ctrlNama.clear();
+                              setState(() {
+                                isShowClearNama = false;
+                              });
+                            },
+                            icon: const Icon(Icons.clear),
+                          )
+                        : null,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: ctrlHarga,
-                  decoration: const InputDecoration(
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                      setState(() {
+                        isShowClearHarga = false;
+                      });
+                    } else {
+                      setState(() {
+                        isShowClearHarga = true;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
                     hintText: 'enter price',
                     labelText: 'Price',
-                    border: OutlineInputBorder(),
+                    suffixIcon: isShowClearHarga
+                        ? IconButton(
+                            onPressed: () {
+                              ctrlHarga.clear();
+                              setState(() {
+                                isShowClearHarga = false;
+                              });
+                            },
+                            icon: const Icon(Icons.clear),
+                          )
+                        : null,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: ctrlDesc,
-                  decoration: const InputDecoration(
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                      setState(() {
+                        isShowClearDesc = false;
+                      });
+                    } else {
+                      setState(() {
+                        isShowClearDesc = true;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
                     hintText: 'enter description',
                     labelText: 'Description',
-                    border: OutlineInputBorder(),
+                    suffixIcon: isShowClearDesc
+                        ? IconButton(
+                            onPressed: () {
+                              ctrlDesc.clear();
+                              setState(() {
+                                isShowClearDesc = false;
+                              });
+                            },
+                            icon: const Icon(Icons.clear),
+                          )
+                        : null,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    ctrlNama.clear();
-                    ctrlHarga.clear();
-                    ctrlDesc.clear();
-                  },
-                  child: const Text("clear"),
-                ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
                     final nama = ctrlNama.text;
                     final harga = int.parse(ctrlHarga.text);
                     final desc = ctrlDesc.text;
+                    final data = {'nama': nama, 'harga': harga, 'desc': desc};
                     setState(() {
                       isLoading = true;
                     });
 
-                    await FirebaseFirestore.instance
-                        .collection('coba')
-                        .doc()
-                        .set({'nama': nama, 'harga': harga, 'desc': desc});
-                    setState(() {
-                      isLoading = false;
-                    });
+                    await createDoc(data);
 
                     ctrlNama.clear();
                     ctrlHarga.clear();
