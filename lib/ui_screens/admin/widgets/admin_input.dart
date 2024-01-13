@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class InputView extends StatefulWidget {
-  const InputView({super.key});
+class AdminInput extends StatefulWidget {
+  const AdminInput({super.key});
 
   @override
-  State<InputView> createState() => _InputViewState();
+  State<AdminInput> createState() => _AdminInputState();
 }
 
-class _InputViewState extends State<InputView> {
+class _AdminInputState extends State<AdminInput> {
   final ctrlNama = TextEditingController();
 
   final ctrlHarga = TextEditingController();
@@ -85,6 +85,9 @@ class _InputViewState extends State<InputView> {
                     ctrlNama.clear();
                     ctrlHarga.clear();
                     ctrlDesc.clear();
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
 
                     // debugPrint(nama.runtimeType.toString());
                     // debugPrint(harga.runtimeType.toString());
