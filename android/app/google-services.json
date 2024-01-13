@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "84649509824",
+    "project_id": "siska-fb",
+    "storage_bucket": "siska-fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84649509824:android:25e224ec750cf6ef30fe25",
+        "android_client_info": {
+          "package_name": "com.example.siska_fb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJHPve3SiKmWCJ_g3AIDXaK0WYquNB-CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

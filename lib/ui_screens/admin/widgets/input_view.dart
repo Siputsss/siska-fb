@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class InputView extends StatelessWidget {
-  const InputView({super.key});
+  InputView({super.key});
+
+  final ctrlNama = TextEditingController();
+  final ctrlHarga = TextEditingController();
+  final ctrlDesc = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,24 +19,27 @@ class InputView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: ctrlNama,
+                  decoration: const InputDecoration(
                     hintText: 'enter the product name',
                     labelText: 'Product Name',
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: ctrlHarga,
+                  decoration: const InputDecoration(
                     hintText: 'enter price',
                     labelText: 'Price',
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: ctrlDesc,
+                  decoration: const InputDecoration(
                     hintText: 'enter description',
                     labelText: 'Description',
                     border: OutlineInputBorder(),
@@ -40,7 +47,15 @@ class InputView extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final nama = ctrlNama.text;
+                    final harga = int.parse(ctrlHarga.text);
+                    final desc = ctrlDesc.text;
+                    // final x = {'nama': nama, 'harga': harga, 'desc': desc};
+                    // print(nama.runtimeType);
+                    // print(harga.runtimeType);
+                    // print(desc.runtimeType);
+                  },
                   child: const Text(
                     "Submit",
                   ),
