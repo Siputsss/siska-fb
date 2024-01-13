@@ -1,11 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class InputView extends StatelessWidget {
-  InputView({super.key});
+class InputView extends StatefulWidget {
+  const InputView({super.key});
 
+  @override
+  State<InputView> createState() => _InputViewState();
+}
+
+class _InputViewState extends State<InputView> {
   final ctrlNama = TextEditingController();
+
   final ctrlHarga = TextEditingController();
+
   final ctrlDesc = TextEditingController();
+
+  var isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +58,39 @@ class InputView extends StatelessWidget {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
+                    ctrlNama.clear();
+                    ctrlHarga.clear();
+                    ctrlDesc.clear();
+                  },
+                  child: const Text("clear"),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async {
                     final nama = ctrlNama.text;
                     final harga = int.parse(ctrlHarga.text);
                     final desc = ctrlDesc.text;
-                    // final x = {'nama': nama, 'harga': harga, 'desc': desc};
-                    // print(nama.runtimeType);
-                    // print(harga.runtimeType);
-                    // print(desc.runtimeType);
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    await FirebaseFirestore.instance
+                        .collection('coba')
+                        .doc()
+                        .set({'nama': nama, 'harga': harga, 'desc': desc});
+                    setState(() {
+                      isLoading = false;
+                    });
+
+                    ctrlNama.clear();
+                    ctrlHarga.clear();
+                    ctrlDesc.clear();
+
+                    // debugPrint(nama.runtimeType.toString());
+                    // debugPrint(harga.runtimeType.toString());
+                    // debugPrint(desc.runtimeType.toString());
                   },
-                  child: const Text(
-                    "Submit",
-                  ),
+                  child: Text(isLoading ? "loading..." : "Submit"),
                 ),
               ],
             ),
