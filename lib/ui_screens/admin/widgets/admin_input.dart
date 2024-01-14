@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
 import 'package:siska_fb/ui_screens/models/produk.dart';
@@ -23,8 +24,26 @@ class _AdminInputState extends State<AdminInput> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                pickedFile == null
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.network(pickedFile!.path),
+                      ),
+                Text(
+                  '${pickedFile?.path}',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final imagePicker = await ImagePicker().pickImage(source: ImageSource.gallery);
+                    // debugPrint(imagePicker!.name.toString());
+                    pickedFile = imagePicker;
+                    // debugPrint(pickedFile!.path.toString());
+                    setState(() {});
+                  },
                   child: const Text("get image"),
                 ),
                 const SizedBox(height: 10),

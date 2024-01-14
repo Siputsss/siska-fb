@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:siska_fb/ui_screens/models/produk.dart';
 
 final ctrlNama = TextEditingController();
@@ -16,3 +17,6 @@ var selectedId = '';
 List<ProdukX> userList = [];
 
 var isEnd = false;
+
+//* STORAGE */
+XFile? pickedFile;
