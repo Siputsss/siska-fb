@@ -13,6 +13,7 @@ Future createDoc(ProdukX data) async {
     'created_at': createdAt,
   });
   await FirebaseFirestore.instance.collection('detail').doc(docId).set(map);
+  userList.insert(0, data);
 }
 
 Future<List<ProdukX>> getColl() async {
@@ -45,4 +46,7 @@ Future<void> deleteDoc(String docId) async {
 loadmore() async {
   final dataColl = await getColl();
   userList.addAll(dataColl);
+  if (dataColl.length < 3) {
+    isEnd = true;
+  }
 }

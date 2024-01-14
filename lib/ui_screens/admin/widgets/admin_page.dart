@@ -89,16 +89,18 @@ class _AdminPageState extends State<AdminPage> {
                         );
                       },
                     ),
-                    snapshot.connectionState == ConnectionState.waiting
-                        ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                loadmore();
-                              });
-                            },
-                            child: const Text("load more"),
-                          ),
+                    isEnd
+                        ? const Text('- end of list -')
+                        : snapshot.connectionState == ConnectionState.waiting
+                            ? const CircularProgressIndicator()
+                            : ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    loadmore();
+                                  });
+                                },
+                                child: const Text("load more"),
+                              ),
                   ],
                 ),
               );
