@@ -32,9 +32,7 @@ class Home extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const AdminPage()),
                 );
               },
-              child: Text(
-                "Admin Page",
-              ),
+              child: const Text("Admin Page"),
             ),
           ],
         ),
