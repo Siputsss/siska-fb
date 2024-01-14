@@ -24,9 +24,9 @@ class AdminDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(snapshot.data!.id),
-                    Text(snapshot.data!.data()!['nama'].toString()),
-                    Text(snapshot.data!.data()!['harga'].toString()),
-                    Text(snapshot.data!.data()!['desc'].toString()),
+                    Text(snapshot.data!.nama),
+                    Text(snapshot.data!.harga.toString()),
+                    Text(snapshot.data!.desc),
                   ],
                 );
               }

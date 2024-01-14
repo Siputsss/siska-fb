@@ -13,6 +13,12 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
   @override
+  void initState() {
+    loadmore();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -22,6 +28,7 @@ class _AdminPageState extends State<AdminPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -32,6 +39,7 @@ class _AdminPageState extends State<AdminPage> {
             ),
             const SizedBox(height: 10),
             FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 setState(() {});
               },
@@ -39,27 +47,35 @@ class _AdminPageState extends State<AdminPage> {
             ),
           ],
         ),
-        body: Center(
-          child: FutureBuilder(
-            future: getColl(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
-              if (snapshot.hasData) {
-                return Column(
+        body: FutureBuilder(
+          future: getColl(),
+          builder: (context, snapshot) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return const Center(child: CircularProgressIndicator());
+            // }
+            if (snapshot.hasData) {
+              return SingleChildScrollView(
+                child: Column(
                   children: [
                     ...List.generate(
-                      snapshot.data!.docs.length,
+                      userList.length,
                       (index) {
-                        final data = snapshot.data!.docs[index].data();
-                        final id = snapshot.data!.docs[index].id;
+                        // final data = snapshot.data![index];
+                        final data = userList[index];
+                        final id = data.id;
                         return Card(
                           child: ListTile(
-                            title: Text('${data['nama']}'),
-                            subtitle: Text(id),
+                            title: Text(data.nama),
+                            subtitle: Text(data.createdAt),
                             selected: id == selectedId,
                             selectedTileColor: Colors.grey.withOpacity(0.2),
+                            trailing: IconButton(
+                              onPressed: () async {
+                                await deleteDoc(id);
+                                setState(() {});
+                              },
+                              icon: const Icon(Icons.delete),
+                            ),
                             onTap: () {
                               setState(() {
                                 selectedId = id;
@@ -72,13 +88,25 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                         );
                       },
-                    )
+                    ),
+                    snapshot.connectionState == ConnectionState.waiting
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                loadmore();
+                              });
+                            },
+                            child: const Text("load more"),
+                          ),
                   ],
-                );
-              }
-              return const Text('text');
-            },
-          ),
+                ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
+import 'package:siska_fb/ui_screens/models/produk.dart';
 
 class AdminInput extends StatefulWidget {
   const AdminInput({super.key});
@@ -25,15 +26,9 @@ class _AdminInputState extends State<AdminInput> {
                 TextField(
                   controller: ctrlNama,
                   onChanged: (value) {
-                    if (value.isEmpty) {
-                      setState(() {
-                        isShowClearNama = false;
-                      });
-                    } else {
-                      setState(() {
-                        isShowClearNama = true;
-                      });
-                    }
+                    setState(() {
+                      isShowClearNama = value.isNotEmpty;
+                    });
                   },
                   decoration: InputDecoration(
                     hintText: 'enter the product name',
@@ -56,15 +51,9 @@ class _AdminInputState extends State<AdminInput> {
                 TextField(
                   controller: ctrlHarga,
                   onChanged: (value) {
-                    if (value.isEmpty) {
-                      setState(() {
-                        isShowClearHarga = false;
-                      });
-                    } else {
-                      setState(() {
-                        isShowClearHarga = true;
-                      });
-                    }
+                    setState(() {
+                      isShowClearHarga = value.isNotEmpty;
+                    });
                   },
                   decoration: InputDecoration(
                     hintText: 'enter price',
@@ -87,15 +76,9 @@ class _AdminInputState extends State<AdminInput> {
                 TextField(
                   controller: ctrlDesc,
                   onChanged: (value) {
-                    if (value.isEmpty) {
-                      setState(() {
-                        isShowClearDesc = false;
-                      });
-                    } else {
-                      setState(() {
-                        isShowClearDesc = true;
-                      });
-                    }
+                    setState(() {
+                      isShowClearDesc = value.isNotEmpty;
+                    });
                   },
                   decoration: InputDecoration(
                     hintText: 'enter description',
@@ -118,15 +101,25 @@ class _AdminInputState extends State<AdminInput> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    final nama = ctrlNama.text;
-                    final harga = int.parse(ctrlHarga.text);
-                    final desc = ctrlDesc.text;
-                    final data = {'nama': nama, 'harga': harga, 'desc': desc};
+                    final valNama = ctrlNama.text;
+                    final valHarga = int.parse(ctrlHarga.text);
+                    final valDesc = ctrlDesc.text;
+                    final id = UniqueKey().toString();
+                    // final data = {'nama': nama, 'harga': harga, 'desc': desc};
+                    final newProduk = ProdukX(
+                      createdAt: DateTime.now().toString(),
+                      id: id,
+                      nama: valNama,
+                      harga: valHarga,
+                      desc: valDesc,
+                    );
                     setState(() {
                       isLoading = true;
                     });
-
-                    await createDoc(data);
+                    await createDoc(newProduk);
+                    setState(() {
+                      isLoading = false;
+                    });
 
                     ctrlNama.clear();
                     ctrlHarga.clear();
