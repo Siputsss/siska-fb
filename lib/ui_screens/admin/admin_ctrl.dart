@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
 import 'package:siska_fb/ui_screens/models/produk.dart';
 
@@ -48,5 +49,14 @@ loadmore() async {
   userList.addAll(dataColl);
   if (dataColl.length < 3) {
     isEnd = true;
+  }
+}
+
+Future<String?> getImageUrlFromStorage(String id) async {
+  try {
+    final ref = FirebaseStorage.instance.ref('profile/$id');
+    return await ref.getDownloadURL();
+  } catch (e) {
+    return null;
   }
 }

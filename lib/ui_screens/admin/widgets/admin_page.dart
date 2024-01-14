@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
@@ -63,10 +64,11 @@ class _AdminPageState extends State<AdminPage> {
                         // final data = snapshot.data![index];
                         final data = userList[index];
                         final id = data.id;
+
                         return Card(
                           child: ListTile(
                             title: Text(data.nama),
-                            subtitle: Text(data.createdAt),
+                            subtitle: Text(id),
                             selected: id == selectedId,
                             selectedTileColor: Colors.grey.withOpacity(0.2),
                             trailing: IconButton(
@@ -85,6 +87,18 @@ class _AdminPageState extends State<AdminPage> {
                                 MaterialPageRoute(builder: (context) => AdminDetail(id: id)),
                               );
                             },
+                            //**MULAI KE STORAGE-----------------------------------------
+                            leading: FutureBuilder(
+                              future: FirebaseStorage.instance.ref('profile').listAll(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return CircleAvatar(
+                                    backgroundImage: NetworkImage(snapshot.data.toString()),
+                                  );
+                                }
+                                return const Icon(Icons.person);
+                              },
+                            ),
                           ),
                         );
                       },

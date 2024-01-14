@@ -23,6 +23,11 @@ class _AdminInputState extends State<AdminInput> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("get image"),
+                ),
+                const SizedBox(height: 10),
                 TextField(
                   controller: ctrlNama,
                   onChanged: (value) {
