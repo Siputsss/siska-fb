@@ -7,13 +7,13 @@ import 'package:siska_fb/ui_screens/models/produk.dart';
 Future createDoc(ProdukX data) async {
   final map = data.toMap();
   final docId = data.id;
-  final nama = data.nama;
-  final createdAt = data.createdAt;
-  await FirebaseFirestore.instance.collection('coba').doc(docId).set({
-    'nama': nama,
+  final produk = {
+    'nama': data.nama,
     'id': docId,
-    'created_at': createdAt,
-  });
+    'created_at': data.createdAt,
+    'image': data.image,
+  };
+  await FirebaseFirestore.instance.collection('coba').doc(docId).set(produk);
   await FirebaseFirestore.instance.collection('detail').doc(docId).set(map);
   userList.insert(0, data);
 }

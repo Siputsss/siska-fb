@@ -46,15 +46,6 @@ class _AdminInputState extends State<AdminInput> {
                   child: const Text("get image"),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () async {
-                    final getUrl = await upload();
-                    imageUrl = getUrl;
-                    setState(() {});
-                  },
-                  child: const Text("upload"),
-                ),
-                const SizedBox(height: 10),
                 Text(imageUrl, textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 TextField(
@@ -140,12 +131,18 @@ class _AdminInputState extends State<AdminInput> {
                     final valDesc = ctrlDesc.text;
                     final id = UniqueKey().toString();
                     // final data = {'nama': nama, 'harga': harga, 'desc': desc};
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await upload();
+                    setState(() {});
                     final newProduk = ProdukX(
                       createdAt: DateTime.now().toString(),
                       id: id,
                       nama: valNama,
                       harga: valHarga,
                       desc: valDesc,
+                      image: imageUrl,
                     );
                     setState(() {
                       isLoading = true;

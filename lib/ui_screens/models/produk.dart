@@ -5,12 +5,14 @@ class ProdukX {
   final String nama;
   final String desc;
   final String createdAt;
+  final String image;
   final int harga;
   ProdukX({
     this.id = '',
     this.nama = '',
     this.desc = '',
     this.createdAt = '',
+    this.image = '',
     this.harga = 0,
   });
 
@@ -19,6 +21,7 @@ class ProdukX {
     String? nama,
     String? desc,
     String? createdAt,
+    String? image,
     int? harga,
   }) {
     return ProdukX(
@@ -26,6 +29,7 @@ class ProdukX {
       nama: nama ?? this.nama,
       desc: desc ?? this.desc,
       createdAt: createdAt ?? this.createdAt,
+      image: image ?? this.image,
       harga: harga ?? this.harga,
     );
   }
@@ -37,6 +41,7 @@ class ProdukX {
     result.addAll({'nama': nama});
     result.addAll({'desc': desc});
     result.addAll({'created_at': createdAt});
+    result.addAll({'image': image});
     result.addAll({'harga': harga});
 
     return result;
@@ -48,6 +53,7 @@ class ProdukX {
       nama: map['nama'] ?? '',
       desc: map['desc'] ?? '',
       createdAt: map['created_at'] ?? '',
+      image: map['image'] ?? '',
       harga: map['harga']?.toInt() ?? 0,
     );
   }
@@ -58,7 +64,7 @@ class ProdukX {
 
   @override
   String toString() {
-    return 'ProdukX(id: $id, nama: $nama, desc: $desc, createdAt: $createdAt, harga: $harga)';
+    return 'ProdukX(id: $id, nama: $nama, desc: $desc, createdAt: $createdAt, image: $image, harga: $harga)';
   }
 
   @override
@@ -70,11 +76,12 @@ class ProdukX {
         other.nama == nama &&
         other.desc == desc &&
         other.createdAt == createdAt &&
+        other.image == image &&
         other.harga == harga;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ nama.hashCode ^ desc.hashCode ^ createdAt.hashCode ^ harga.hashCode;
+    return id.hashCode ^ nama.hashCode ^ desc.hashCode ^ createdAt.hashCode ^ image.hashCode ^ harga.hashCode;
   }
 }

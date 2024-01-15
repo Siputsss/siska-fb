@@ -20,9 +20,17 @@ class AdminDetail extends StatelessWidget {
                 return const CircularProgressIndicator();
               }
               if (snapshot.hasData) {
+                final data = snapshot.data!;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    data.image.isEmpty
+                        ? const SizedBox.shrink()
+                        : SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Image.network(data.image),
+                          ),
                     Text(snapshot.data!.id),
                     Text(snapshot.data!.nama),
                     Text(snapshot.data!.harga.toString()),
