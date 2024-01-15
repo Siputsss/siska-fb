@@ -64,3 +64,19 @@ Future<String> upload() async {
   imageUrl = await uploadImage.ref.getDownloadURL();
   return imageUrl;
 }
+
+Future<void> update(ProdukX data) async {
+  final map = data.toMap();
+  final docId = data.id;
+  final produk = {
+    'nama': data.nama,
+    'id': docId,
+    'created_at': data.createdAt,
+    'image': data.image,
+  };
+  await FirebaseFirestore.instance.collection('coba').doc(docId).set(produk);
+  await FirebaseFirestore.instance.collection('detail').doc(docId).set(map);
+  final index = userList.indexWhere((element) => element.id == docId);
+  debugPrint(userList[index].toString());
+  userList[index] = data;
+}
