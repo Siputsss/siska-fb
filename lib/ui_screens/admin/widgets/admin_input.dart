@@ -24,28 +24,38 @@ class _AdminInputState extends State<AdminInput> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                pickedFile == null
+                pickedImage == null
                     ? const SizedBox.shrink()
                     : SizedBox(
                         height: 100,
                         width: 100,
-                        child: Image.network(pickedFile!.path),
+                        child: Image.network('${pickedImage?.path}'),
                       ),
                 Text(
-                  '${pickedFile?.path}',
+                  '${pickedImage?.path}',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    final imagePicker = await ImagePicker().pickImage(source: ImageSource.gallery);
-                    // debugPrint(imagePicker!.name.toString());
-                    pickedFile = imagePicker;
-                    // debugPrint(pickedFile!.path.toString());
+                    pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
                     setState(() {});
+                    // debugPrint(imagePicker!.name.toString());
+                    // debugPrint(pickedFile!.path.toString());
                   },
                   child: const Text("get image"),
                 ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async {
+                    final getUrl = await upload();
+                    imageUrl = getUrl;
+                    setState(() {});
+                  },
+                  child: const Text("upload"),
+                ),
+                const SizedBox(height: 10),
+                Text(imageUrl, textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 TextField(
                   controller: ctrlNama,

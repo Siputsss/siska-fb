@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
 import 'package:siska_fb/ui_screens/models/produk.dart';
 
@@ -52,11 +53,14 @@ loadmore() async {
   }
 }
 
-Future<String?> getImageUrlFromStorage(String id) async {
-  try {
-    final ref = FirebaseStorage.instance.ref('profile/$id');
-    return await ref.getDownloadURL();
-  } catch (e) {
-    return null;
-  }
+//*STORAGE
+Future<String> upload() async {
+  final namaFoto = pickedImage!.name;
+  final tipeFoto = pickedImage!.mimeType;
+  final idFoto = UniqueKey().toString();
+  final imageByte = await pickedImage!.readAsBytes();
+  final metaData = SettableMetadata(contentType: tipeFoto);
+  final uploadImage = await FirebaseStorage.instance.ref('$idFoto $namaFoto').putData(imageByte, metaData);
+  imageUrl = await uploadImage.ref.getDownloadURL();
+  return imageUrl;
 }

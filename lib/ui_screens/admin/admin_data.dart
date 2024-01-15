@@ -19,4 +19,7 @@ List<ProdukX> userList = [];
 var isEnd = false;
 
 //* STORAGE */
-XFile? pickedFile;
+XFile? pickedImage;
+XFile? imageUpload;
+
+var imageUrl = '';
