@@ -27,7 +27,7 @@ class _CustPageState extends State<CustPage> {
         future: getColl(),
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? userList.isEmpty
+              ? produkList.isEmpty
                   ? const Center(child: Text('- data is empty -'))
                   : SingleChildScrollView(
                       child: Column(
@@ -35,9 +35,9 @@ class _CustPageState extends State<CustPage> {
                           Center(
                             child: Wrap(alignment: WrapAlignment.center, children: [
                               ...List.generate(
-                                userList.length,
+                                produkList.length,
                                 (index) {
-                                  final data = userList[index];
+                                  final data = produkList[index];
                                   final id = data.id;
                                   return GestureDetector(
                                     child: Padding(

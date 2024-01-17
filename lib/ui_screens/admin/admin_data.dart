@@ -14,7 +14,7 @@ var isShowClearDesc = false;
 
 var selectedId = '';
 
-List<ProdukX> userList = [];
+List<ProdukX> produkList = [];
 
 var isEnd = false;
 

@@ -57,10 +57,10 @@ class _AdminPageState extends State<AdminPage> {
             return Column(
               children: [
                 ...List.generate(
-                  userList.length,
+                  produkList.length,
                   (index) {
                     // final data = snapshot.data![index];
-                    final data = userList[index];
+                    final data = produkList[index];
                     final id = data.id;
 
                     return Card(
@@ -105,7 +105,7 @@ class _AdminPageState extends State<AdminPage> {
                   },
                 ),
                 isEnd
-                    ? const Text('- end of list -')
+                    ? const Center(child: Text('- end of list -'))
                     : snapshot.connectionState == ConnectionState.waiting
                         ? const CircularProgressIndicator()
                         : ElevatedButton(

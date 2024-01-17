@@ -60,36 +60,30 @@ class _AdminEditState extends State<AdminEdit> {
                             "Get Image",
                           ),
                         ),
-                        Card(
-                          child: Column(
-                            children: [
-                              TextField(
-                                controller: TextEditingController(text: data!.nama),
-                                decoration: const InputDecoration(
-                                  hintText: 'enter product name',
-                                  labelText: 'Product Name',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              TextField(
-                                controller: TextEditingController(text: data.harga.toString()),
-                                decoration: const InputDecoration(
-                                  hintText: 'enter price',
-                                  labelText: 'Price',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              TextField(
-                                controller: TextEditingController(text: data.desc),
-                                decoration: const InputDecoration(
-                                  hintText: 'enter description',
-                                  labelText: 'Description',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ],
+                        TextField(
+                          controller: TextEditingController(text: data!.nama),
+                          decoration: const InputDecoration(
+                            hintText: 'enter product name',
+                            labelText: 'Product Name',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        TextField(
+                          controller: TextEditingController(text: data.harga.toString()),
+                          decoration: const InputDecoration(
+                            hintText: 'enter price',
+                            labelText: 'Price',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        TextField(
+                          controller: TextEditingController(text: data.desc),
+                          decoration: const InputDecoration(
+                            hintText: 'enter description',
+                            labelText: 'Description',
+                            border: OutlineInputBorder(),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -97,32 +91,38 @@ class _AdminEditState extends State<AdminEdit> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final editNama = ctrlNama.text;
-                        final editHarga = int.parse(ctrlHarga.text);
-                        final editDesc = ctrlDesc.text;
-                        // final editCreatedAt = DateTime.now();
-                        final editImage = imageUrl;
-                        final id = selectedId;
+                        final editNama = ctrlNama.text.isEmpty ? snapshot.data!.nama : ctrlNama.text;
+                        final editHarga = ctrlHarga.text.isEmpty ? snapshot.data!.harga : int.parse(ctrlHarga.text);
+                        final editDesc = ctrlDesc.text.isEmpty ? snapshot.data!.desc : ctrlDesc.text;
+                        final editCreatedAt = snapshot.data!.createdAt;
+                        // final editImage = imageUrl;
+                        final id = snapshot.data!.id;
 
                         final editproduk = ProdukX(
                           id: id,
                           nama: editNama,
                           harga: editHarga,
                           desc: editDesc,
-                          // createdAt: editCreatedAt.toString(),
-                          image: editImage,
+                          createdAt: editCreatedAt,
+                          image: pickedImage == null ? snapshot.data!.image : await upload(),
                         );
+                        setState(() {
+                          isLoading = true;
+                        });
+                        await update(editproduk);
+                        setState(() {
+                          isLoading = false;
+                        });
                         ctrlNama.clear();
                         ctrlHarga.clear();
                         ctrlDesc.clear();
 
+                        // Navigator.pop(context);
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
-                        Navigator.pop(context);
-                        update(editproduk);
+                        setState(() {});
                       },
-                      child: const Text(
-                        "Edit Product",
-                      ),
+                      child: Text(isLoading ? 'loading...' : "Edit Product"),
                     ),
                   ],
                 ),

@@ -15,7 +15,7 @@ Future createDoc(ProdukX data) async {
   };
   await FirebaseFirestore.instance.collection('coba').doc(docId).set(produk);
   await FirebaseFirestore.instance.collection('detail').doc(docId).set(map);
-  userList.insert(0, data);
+  produkList.insert(0, data);
 }
 
 Future<List<ProdukX>> getColl() async {
@@ -25,7 +25,7 @@ Future<List<ProdukX>> getColl() async {
       .collection('coba')
       .orderBy('created_at', descending: true)
       .limit(3)
-      .startAfter([userList.isEmpty ? '9999-99-99' : userList.last.createdAt]).get();
+      .startAfter([produkList.isEmpty ? '9999-99-99' : produkList.last.createdAt]).get();
   for (var element in result.docs) {
     users.add(ProdukX.fromMap(element.data()));
   }
@@ -41,13 +41,13 @@ Future<ProdukX> getDoc(String id) async {
 Future<void> deleteDoc(String docId) async {
   await FirebaseFirestore.instance.collection('coba').doc(docId).delete();
   await FirebaseFirestore.instance.collection('detail').doc(docId).delete();
-  final index = userList.indexWhere((element) => element.id == docId);
-  userList.removeAt(index);
+  final index = produkList.indexWhere((element) => element.id == docId);
+  produkList.removeAt(index);
 }
 
 loadmore() async {
   final dataColl = await getColl();
-  userList.addAll(dataColl);
+  produkList.addAll(dataColl);
   if (dataColl.length < 3) {
     isEnd = true;
   }
@@ -76,7 +76,7 @@ Future<void> update(ProdukX data) async {
   };
   await FirebaseFirestore.instance.collection('coba').doc(docId).set(produk);
   await FirebaseFirestore.instance.collection('detail').doc(docId).set(map);
-  final index = userList.indexWhere((element) => element.id == docId);
-  debugPrint(userList[index].toString());
-  userList[index] = data;
+  final index = produkList.indexWhere((element) => element.id == docId);
+  // debugPrint(produkList[index].toString());
+  produkList[index] = data;
 }
