@@ -44,16 +44,9 @@ class Home extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       await FirebaseAuth.instance.signInAnonymously();
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CustPage(),
-                        ),
-                      );
                     },
                     child: const Text(
-                      "Sign In Anonymus",
+                      "Sign in Anonymous",
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -61,13 +54,6 @@ class Home extends StatelessWidget {
                     onPressed: () async {
                       final google = GoogleAuthProvider().setCustomParameters({'prompt': 'select_account'});
                       await FirebaseAuth.instance.signInWithPopup(google);
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CustPage(),
-                        ),
-                      );
                     },
                     child: const Text("Sign in by Google"),
                   ),
