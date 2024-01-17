@@ -33,7 +33,8 @@ class _AdminEditState extends State<AdminEdit> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data;
-              return Center(
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,6 +61,7 @@ class _AdminEditState extends State<AdminEdit> {
                             "Get Image",
                           ),
                         ),
+                        const SizedBox(height: 10),
                         TextField(
                           controller: TextEditingController(text: data!.nama),
                           decoration: const InputDecoration(

@@ -65,42 +65,40 @@ class _AdminPageState extends State<AdminPage> {
 
                     return Card(
                       child: ListTile(
-                        title: Text(data.nama),
-                        subtitle: Text(id),
-                        selected: id == selectedId,
-                        selectedTileColor: Colors.grey.withOpacity(0.2),
-                        trailing: IconButton(
-                          onPressed: () async {
-                            await deleteDoc(id);
-                            setState(() {});
+                          title: Text(data.nama),
+                          subtitle: Text(id),
+                          selected: id == selectedId,
+                          selectedTileColor: Colors.grey.withOpacity(0.2),
+                          trailing: IconButton(
+                            onPressed: () async {
+                              await deleteDoc(id);
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedId = id;
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AdminDetail(id: id)),
+                            );
                           },
-                          icon: const Icon(Icons.delete),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            selectedId = id;
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AdminDetail(id: id)),
-                          );
-                        },
-                        //**MULAI KE STORAGE-----------------------------------------
-                        leading: FutureBuilder(
-                          future: getDoc(id),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              final data = snapshot.data!;
-                              return data.image.isEmpty
-                                  ? const Icon(Icons.image)
-                                  : CircleAvatar(
-                                      backgroundImage: NetworkImage(data.image),
-                                    );
-                            }
-                            return const Icon(Icons.image);
-                          },
-                        ),
-                      ),
+                          //**MULAI KE STORAGE-----------------------------------------
+                          leading: SizedBox(
+                            child: data.image.isEmpty
+                                ? const SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: Icon(Icons.image),
+                                  )
+                                : SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: Image.network(data.image),
+                                  ),
+                          )),
                     );
                   },
                 ),

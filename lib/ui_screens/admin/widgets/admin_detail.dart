@@ -44,7 +44,7 @@ class AdminDetail extends StatelessWidget {
                           ),
                     Text(snapshot.data!.id),
                     Text(snapshot.data!.nama),
-                    Text(snapshot.data!.harga.toString()),
+                    Text('Rp ${snapshot.data!.harga}'),
                     Text(snapshot.data!.desc),
                   ],
                 );
