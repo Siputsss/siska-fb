@@ -54,13 +54,13 @@ loadmore() async {
 }
 
 //*STORAGE
-Future<String> upload() async {
-  final namaFoto = pickedImage!.name;
+Future<String> upload(String id) async {
+  // final namaFoto = pickedImage!.name;
   final tipeFoto = pickedImage!.mimeType;
-  final idFoto = UniqueKey().toString();
+  // final idFoto = UniqueKey().toString();
   final imageByte = await pickedImage!.readAsBytes();
   final metaData = SettableMetadata(contentType: tipeFoto);
-  final uploadImage = await FirebaseStorage.instance.ref('$idFoto $namaFoto').putData(imageByte, metaData);
+  final uploadImage = await FirebaseStorage.instance.ref(id).putData(imageByte, metaData);
   imageUrl = await uploadImage.ref.getDownloadURL();
   return imageUrl;
 }

@@ -40,20 +40,19 @@ class _CustPageState extends State<CustPage> {
                                   final data = produkList[index];
                                   final id = data.id;
                                   return GestureDetector(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: 200,
+                                    child: Card(
+                                      child: SizedBox(
+                                        height: 150,
                                         width: 150,
-                                        decoration:
-                                            BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
                                         child: Column(
                                           children: [
-                                            const SizedBox(height: 10),
-                                            SizedBox(width: 100, height: 100, child: Image.network(data.image)),
-                                            const SizedBox(height: 10),
+                                            SizedBox(
+                                              height: 100,
+                                              width: 100,
+                                              child: Image.network(data.image),
+                                            ),
                                             Text(data.nama),
-                                            Text('Rp${data.harga.toString()}'),
+                                            Text('Rp ${data.harga.toString()}'),
                                           ],
                                         ),
                                       ),

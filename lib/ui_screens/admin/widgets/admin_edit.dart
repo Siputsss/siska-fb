@@ -104,7 +104,7 @@ class _AdminEditState extends State<AdminEdit> {
                           harga: editHarga,
                           desc: editDesc,
                           createdAt: editCreatedAt,
-                          image: pickedImage == null ? snapshot.data!.image : await upload(),
+                          image: await upload(id),
                         );
                         setState(() {
                           isLoading = true;
