@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'dart:html' as html;
@@ -26,24 +27,52 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AdminPage()),
-                );
-              },
-              child: const Text("Admin Page"),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CustPage()),
-                );
-              },
-              child: const Text("Customer Page"),
+            StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) => Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AdminPage()),
+                      );
+                    },
+                    child: const Text("Admin Page"),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await FirebaseAuth.instance.signInAnonymously();
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CustPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Sign In Anonymus",
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final google = GoogleAuthProvider().setCustomParameters({'prompt': 'select_account'});
+                      await FirebaseAuth.instance.signInWithPopup(google);
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CustPage(),
+                        ),
+                      );
+                    },
+                    child: const Text("Sign in by Google"),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

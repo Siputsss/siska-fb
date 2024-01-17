@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
@@ -22,6 +23,33 @@ class _CustPageState extends State<CustPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Customer Page'),
+        actions: [
+          StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) => Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.logout),
+                ),
+                const SizedBox(height: 10),
+                IconButton(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.currentUser!.delete();
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: getColl(),
