@@ -39,7 +39,7 @@ class _CustPageState extends State<CustPage> {
                                 (index) {
                                   final data = produkList[index];
                                   final id = data.id;
-                                  return GestureDetector(
+                                  return InkWell(
                                     child: Card(
                                       child: SizedBox(
                                         height: 150,
@@ -52,7 +52,7 @@ class _CustPageState extends State<CustPage> {
                                               child: Image.network(data.image),
                                             ),
                                             Text(data.nama),
-                                            Text('Rp ${data.harga.toString()}'),
+                                            Text('Rp ${data.harga}'),
                                           ],
                                         ),
                                       ),
