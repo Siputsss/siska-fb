@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
 import 'package:siska_fb/ui_screens/admin/admin_data.dart';
-import 'package:siska_fb/ui_screens/admin/widgets/admin_detail.dart';
+import 'package:siska_fb/ui_screens/customer/widgets/customer_detail.dart';
 
 class CustPage extends StatefulWidget {
   const CustPage({super.key});
@@ -84,7 +84,7 @@ class _CustPageState extends State<CustPage> {
                                     onTap: () {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => AdminDetail(id: id)),
+                                        MaterialPageRoute(builder: (context) => CustDetail(id: id)),
                                       );
                                     },
                                   );
