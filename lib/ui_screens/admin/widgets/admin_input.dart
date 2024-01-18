@@ -134,7 +134,7 @@ class _AdminInputState extends State<AdminInput> {
                     setState(() {
                       isLoading = true;
                     });
-                    await upload(id);
+                    await upload();
                     setState(() {});
                     final newProduk = ProdukX(
                       createdAt: DateTime.now().toString(),

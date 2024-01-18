@@ -76,7 +76,7 @@ class _CustPageState extends State<CustPage> {
                                               child: Image.network(data.image),
                                             ),
                                             Text(data.nama),
-                                            Text('Rp ${data.harga}'),
+                                            Text('Rp ${data.harga.toString()}'),
                                           ],
                                         ),
                                       ),

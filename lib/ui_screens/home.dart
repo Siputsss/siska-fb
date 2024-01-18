@@ -49,10 +49,19 @@ class Home extends StatelessWidget {
                       await FirebaseAuth.instance.signInAnonymously();
                     },
                     child: const Text(
-                      "Customer Page",
+                      "Sign In Anonimously",
                     ),
                   ),
                   const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final google = GoogleAuthProvider().setCustomParameters({'prompt': 'select_account'});
+                      await FirebaseAuth.instance.signInWithPopup(google);
+                    },
+                    child: const Text(
+                      "Sign In by Google",
+                    ),
+                  ),
                 ],
               ),
             ),

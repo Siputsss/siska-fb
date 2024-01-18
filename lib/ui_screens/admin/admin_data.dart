@@ -6,11 +6,21 @@ final ctrlNama = TextEditingController();
 final ctrlHarga = TextEditingController();
 final ctrlDesc = TextEditingController();
 
+final ctrlEditNama = TextEditingController();
+final ctrlEditHarga = TextEditingController();
+final ctrlEditDesc = TextEditingController();
+
+ProdukX? produkDetail;
+
 var isLoading = false;
 
 var isShowClearNama = false;
 var isShowClearHarga = false;
 var isShowClearDesc = false;
+
+var isShowClearEditNama = false;
+var isShowClearEditHarga = false;
+var isShowClearEditDesc = false;
 
 var selectedId = '';
 
