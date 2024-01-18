@@ -25,16 +25,22 @@ class _AdminInputState extends State<AdminInput> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 pickedImage == null
-                    ? const SizedBox.shrink()
+                    ? const Card(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: Center(child: Text('pick image')),
+                        ),
+                      )
                     : SizedBox(
                         height: 100,
                         width: 100,
                         child: Image.network('${pickedImage?.path}'),
                       ),
-                Text(
-                  '${pickedImage?.path}',
-                  textAlign: TextAlign.center,
-                ),
+                // Text(
+                //   '${pickedImage?.path}',
+                //   textAlign: TextAlign.center,
+                // ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
@@ -45,8 +51,8 @@ class _AdminInputState extends State<AdminInput> {
                   },
                   child: const Text("get image"),
                 ),
-                const SizedBox(height: 10),
-                Text(imageUrl, textAlign: TextAlign.center),
+                // const SizedBox(height: 10),
+                // Text(imageUrl, textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 TextField(
                   controller: ctrlNama,
