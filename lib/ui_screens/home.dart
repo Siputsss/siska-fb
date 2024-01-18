@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('fashionstore'),
+        title: const Center(child: Text('PetShop')),
         actions: [
           IconButton(
             onPressed: () {
