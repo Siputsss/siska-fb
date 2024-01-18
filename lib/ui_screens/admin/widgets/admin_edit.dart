@@ -44,17 +44,18 @@ class _AdminEditState extends State<AdminEdit> {
                   children: [
                     Column(
                       children: [
-                        pickedImage == null
-                            ? const SizedBox.shrink()
-                            : SizedBox(
-                                height: 100,
-                                width: 100,
-                                child: Image.network('${pickedImage?.path}'),
-                              ),
-                        Text(
-                          '${pickedImage?.path}',
-                          textAlign: TextAlign.center,
+                        // pickedImage == null
+                        //     ? const SizedBox.shrink()
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          // child: Image.network('${pickedImage?.path}'),
+                          child: Image.network(pickedImage == null ? '${produkDetail?.image}' : '${pickedImage?.path}'),
                         ),
+                        // Text(
+                        //   '${pickedImage?.path}',
+                        //   textAlign: TextAlign.center,
+                        // ),
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: () async {
