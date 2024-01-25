@@ -1,6 +1,7 @@
 part of '_index.dart';
 
 final productListData = RM.inject(() => ProductListData());
+// var selectedId = '';
 
 class ProductListData {
   // List<ProdukX> produkList = [];
