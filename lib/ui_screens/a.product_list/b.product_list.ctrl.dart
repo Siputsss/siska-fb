@@ -2,16 +2,16 @@ part of '_index.dart';
 
 class ProductListCtrl {
   Future<List<ProdukX>> getColl() async {
-    List<ProdukX> users = [];
+    List<ProdukX> products = [];
     final result = await FirebaseFirestore.instance
         .collection(dt.listCol)
         .orderBy('created_at', descending: true)
         .limit(dt.limit)
         .startAfter([dt.rxProductList.state.isEmpty ? '9999-99-99' : dt.rxProductList.state.last.createdAt]).get();
     for (var element in result.docs) {
-      users.add(ProdukX.fromMap(element.data()));
+      products.add(ProdukX.fromMap(element.data()));
     }
-    return users;
+    return products;
   }
 
   // Future<List<ProdukX>> getColl() async {
@@ -28,9 +28,9 @@ class ProductListCtrl {
     dt.rxProductList.stateAsync = getColl();
   }
 
-  loadmore(List<ProdukX> products) {
-    dt.rxProductList.state = [...dt.rxProductList.state, ...products];
-    if (products.length < dt.limit) {
+  loadmore(List<ProdukX> moreProducts) {
+    dt.rxProductList.state = [...dt.rxProductList.state, ...moreProducts];
+    if (moreProducts.length < dt.limit) {
       dt.rxIsEnd.state = true;
     }
 

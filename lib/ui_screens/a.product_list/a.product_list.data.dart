@@ -12,8 +12,8 @@ class ProductListData {
         initState: () => ct.readGetColl(),
         onSetState: (p0) {
           if (p0.hasData) {
-            final products = p0.state.whereType<ProdukX>().toList();
-            ct.loadmore(products);
+            final moreProducts = p0.state.whereType<ProdukX>().toList();
+            ct.loadmore(moreProducts);
           }
         },
       ));
@@ -22,5 +22,5 @@ class ProductListData {
 
   final rxIsEnd = false.inj();
 
-  final listCol = 'product';
+  final listCol = 'coba';
 }
