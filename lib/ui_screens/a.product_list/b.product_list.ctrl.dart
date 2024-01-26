@@ -25,7 +25,7 @@ class ProductListCtrl {
   // }
 
   void readGetColl() {
-    dt.rxProductList.stateAsync = getColl();
+    dt.rxLoadMore.stateAsync = getColl();
   }
 
   loadmore(List<ProdukX> moreProducts) {
