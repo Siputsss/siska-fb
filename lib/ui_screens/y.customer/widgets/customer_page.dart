@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
-import 'package:siska_fb/ui_screens/admin/admin_data.dart';
-import 'package:siska_fb/ui_screens/customer/widgets/customer_detail.dart';
+import 'package:siska_fb/ui_screens/x.admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/x.admin/admin_data.dart';
+import 'package:siska_fb/ui_screens/y.customer/widgets/customer_detail.dart';
 
 class CustPage extends StatefulWidget {
   const CustPage({super.key});

@@ -22,6 +22,15 @@ class ProductList extends StatelessWidget {
                         child: ListTile(
                           title: Text(dt.rxProductList.state[index].nama),
                           subtitle: Text(dt.rxProductList.state[index].createdAt),
+                          onTap: () {
+                            ct.selectedId(dt.rxProductList.state[index].id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ProductDetailView()),
+                            );
+                          },
+                          selected: dt.rxSelectedId.state == dt.rxProductList.state[index].id,
+                          selectedTileColor: Colors.grey.withOpacity(0.2),
                         ),
                       ),
                     ),

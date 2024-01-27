@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/x.admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/x.admin/widgets/admin_edit.dart';
 
-class CustDetail extends StatelessWidget {
-  const CustDetail({super.key, required this.id});
+class AdminDetail extends StatefulWidget {
+  const AdminDetail({super.key, required this.id});
+
   final String id;
+
+  @override
+  State<AdminDetail> createState() => _AdminDetailState();
+}
+
+class _AdminDetailState extends State<AdminDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Detail'),
         ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AdminEdit(id: widget.id)),
+                );
+              },
+              child: const Icon(Icons.edit),
+            ),
+            const SizedBox(height: 10),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                setState(() {});
+              },
+              child: const Icon(Icons.refresh),
+            ),
+          ],
+        ),
         body: Center(
           child: FutureBuilder(
-            future: getDoc(id),
+            future: getDoc(widget.id),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();

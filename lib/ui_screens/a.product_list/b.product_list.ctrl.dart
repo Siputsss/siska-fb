@@ -40,4 +40,8 @@ class ProductListCtrl {
     //   isEnd = true;
     // }
   }
+
+  selectedId(String id) {
+    dt.rxSelectedId.state = id;
+  }
 }

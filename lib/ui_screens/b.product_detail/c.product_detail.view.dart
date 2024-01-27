@@ -9,9 +9,20 @@ class ProductDetailView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Product Detail View'),
         ),
-        body: const Center(
-          child: Column(
-            children: [],
+        body: OnBuilder<ProdukX?>.all(
+          listenTo: dt.rxProdukDetail,
+          onWaiting: () => const Center(child: CircularProgressIndicator()),
+          onError: (error, refreshError) => Text(error),
+          onData: (data) => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(data!.id),
+                Text(data.nama),
+                Text('Rp ${data.harga}'),
+                Text(data.desc),
+              ],
+            ),
           ),
         ));
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:siska_fb/ui_screens/admin/admin_ctrl.dart';
-import 'package:siska_fb/ui_screens/admin/admin_data.dart';
+import 'package:siska_fb/ui_screens/x.admin/admin_ctrl.dart';
+import 'package:siska_fb/ui_screens/x.admin/admin_data.dart';
 import 'package:siska_fb/ui_screens/models/produk.dart';
 
 class AdminEdit extends StatefulWidget {

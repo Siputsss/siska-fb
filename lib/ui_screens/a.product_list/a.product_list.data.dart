@@ -23,4 +23,7 @@ class ProductListData {
   final rxIsEnd = false.inj();
 
   final listCol = 'coba';
+
+  // var selectedId = '';
+  final rxSelectedId = RM.inject<String>(() => '');
 }

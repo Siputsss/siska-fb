@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:siska_fb/ui_screens/b.product_detail/_index.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import '../models/produk.dart';
