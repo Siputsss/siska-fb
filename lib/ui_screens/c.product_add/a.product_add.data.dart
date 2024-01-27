@@ -12,4 +12,11 @@ class ProductAddData {
   final rxProductPrice = RM.injectTextEditing();
 
   final rxProductDesc = RM.injectTextEditing();
+
+  // XFile? pickedImage;
+  // var imageUrl = '';
+
+  final rxPickedImage = RM.inject<XFile?>(() => null);
+
+  final rxImageUrl = RM.inject(() => '');
 }
