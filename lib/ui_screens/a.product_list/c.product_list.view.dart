@@ -9,6 +9,15 @@ class ProductListView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Product List View'),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProductAddView()),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
         body: OnBuilder<List<ProdukX>>.all(
           // listenTo: dt.rxProductList,
           listenToMany: [dt.rxLoadMore],
