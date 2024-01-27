@@ -9,6 +9,14 @@ class ProductDetailView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Product Detail View'),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await ct.deleteDoc();
+            // ignore: use_build_context_synchronously
+            Navigator.pop(context);
+          },
+          child: const Icon(Icons.delete),
+        ),
         body: OnBuilder<ProdukX?>.all(
           listenTo: dt.rxProdukDetail,
           onWaiting: () => const Center(child: CircularProgressIndicator()),
