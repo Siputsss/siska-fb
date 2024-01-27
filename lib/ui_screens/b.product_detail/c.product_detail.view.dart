@@ -17,7 +17,12 @@ class ProductDetailView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(data!.id),
+                SizedBox(
+                  height: 150,
+                  width: 150,
+                  child: Image.network(data!.image),
+                ),
+                Text(data.id),
                 Text(data.nama),
                 Text('Rp ${data.harga}'),
                 Text(data.desc),

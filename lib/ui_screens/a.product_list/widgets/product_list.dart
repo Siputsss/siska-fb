@@ -22,6 +22,11 @@ class ProductList extends StatelessWidget {
                         child: ListTile(
                           title: Text(dt.rxProductList.state[index].nama),
                           subtitle: Text(dt.rxProductList.state[index].createdAt),
+                          leading: SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: Image.network(dt.rxProductList.state[index].image),
+                          ),
                           onTap: () {
                             ct.selectedId(dt.rxProductList.state[index].id);
                             Navigator.push(
