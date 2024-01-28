@@ -45,4 +45,8 @@ class ProductListCtrl {
     dt.rxSelectedId.refresh();
     dt.rxSelectedId.state = id;
   }
+
+  deleteAccount() async {
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
 }

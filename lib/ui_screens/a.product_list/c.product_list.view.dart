@@ -7,6 +7,22 @@ class ProductListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: TextButton.icon(
+                onPressed: () {
+                  ct.deleteAccount();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                },
+                icon: const Icon(Icons.no_accounts),
+                label: const Text('delete account'),
+              ),
+            ),
+          ],
           title: const Text('Product List View'),
         ),
         floatingActionButton: FloatingActionButton(
