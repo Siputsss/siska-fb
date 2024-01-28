@@ -9,13 +9,30 @@ class ProductDetailView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Product Detail View'),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await ct.deleteDoc();
-            // ignore: use_build_context_synchronously
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.delete),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () async {
+                await ct.deleteDoc();
+                // ignore: use_build_context_synchronously
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.delete),
+            ),
+            const SizedBox(height: 10),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProductEditView()),
+                );
+              },
+              child: const Icon(Icons.edit),
+            ),
+          ],
         ),
         body: OnBuilder<ProdukX?>.all(
           listenTo: dt.rxProdukDetail,

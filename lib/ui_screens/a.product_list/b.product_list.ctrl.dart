@@ -42,6 +42,7 @@ class ProductListCtrl {
   }
 
   selectedId(String id) {
+    dt.rxSelectedId.refresh();
     dt.rxSelectedId.state = id;
   }
 }

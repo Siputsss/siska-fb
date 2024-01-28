@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:siska_fb/ui_screens/a.product_list/_index.dart';
-import 'package:siska_fb/ui_screens/y.customer/widgets/customer_page.dart';
-import 'package:siska_fb/ui_screens/home.dart';
 
 // import '../ui_screens/home.dart';
 

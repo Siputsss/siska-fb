@@ -16,6 +16,8 @@ class ProdukX {
     this.harga = 0,
   });
 
+  get price => null;
+
   ProdukX copyWith({
     String? id,
     String? nama,

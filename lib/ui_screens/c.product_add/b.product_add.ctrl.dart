@@ -16,7 +16,7 @@ class ProductAddCtrl {
       harga: harga,
       desc: desc,
       createdAt: createdAt,
-      image: await uploadImage(id),
+      image: await ct.uploadImage(id),
     );
 
     final imageUrl = dt.rxImageUrl.state;
